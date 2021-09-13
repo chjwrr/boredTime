@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B556B6D39633D578FFFD3997 /* libPods-boredTime-boredTimeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA89E952A6B29A61C72286D4 /* libPods-boredTime-boredTimeTests.a */; };
+		C601B3AF26EE582C00B73305 /* libreact-native-cameraroll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C601B3AE26EE582C00B73305 /* libreact-native-cameraroll.a */; };
 		FCAC332F7B4AC6CA8EF580DC /* libPods-boredTime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCAB996B83C13CBD887788FB /* libPods-boredTime.a */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = boredTime;
+		};
+		C601B3AB26EE576900B73305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C601B3A726EE576800B73305 /* RNCCameraRoll.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
+			remoteInfo = RNCCameraRoll;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -43,6 +51,8 @@
 		BA89E952A6B29A61C72286D4 /* libPods-boredTime-boredTimeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boredTime-boredTimeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDEE57F18B72A81A251969A /* Pods-boredTime-boredTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boredTime-boredTimeTests.debug.xcconfig"; path = "Target Support Files/Pods-boredTime-boredTimeTests/Pods-boredTime-boredTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BCAB996B83C13CBD887788FB /* libPods-boredTime.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boredTime.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C601B3A726EE576800B73305 /* RNCCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCCameraRoll.xcodeproj; path = "../node_modules/@react-native-community/cameraroll/ios/RNCCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		C601B3AE26EE582C00B73305 /* libreact-native-cameraroll.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-cameraroll.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -59,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C601B3AF26EE582C00B73305 /* libreact-native-cameraroll.a in Frameworks */,
 				FCAC332F7B4AC6CA8EF580DC /* libPods-boredTime.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +110,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C601B3AE26EE582C00B73305 /* libreact-native-cameraroll.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				BCAB996B83C13CBD887788FB /* libPods-boredTime.a */,
 				BA89E952A6B29A61C72286D4 /* libPods-boredTime-boredTimeTests.a */,
@@ -109,6 +121,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C601B3A726EE576800B73305 /* RNCCameraRoll.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -145,8 +158,15 @@
 				BBDEE57F18B72A81A251969A /* Pods-boredTime-boredTimeTests.debug.xcconfig */,
 				70BB21B55338679B605915E7 /* Pods-boredTime-boredTimeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C601B3A826EE576800B73305 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C601B3AC26EE576900B73305 /* libRNCCameraRoll.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +243,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C601B3A826EE576800B73305 /* Products */;
+					ProjectRef = C601B3A726EE576800B73305 /* RNCCameraRoll.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* boredTime */,
@@ -230,6 +256,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C601B3AC26EE576900B73305 /* libRNCCameraRoll.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCCameraRoll.a;
+			remoteRef = C601B3AB26EE576900B73305 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
