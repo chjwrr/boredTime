@@ -1,6 +1,7 @@
 import { PermissionsAndroid, Platform } from "react-native";
 import CameraRoll from "@react-native-community/cameraroll";
 import RNFS from 'react-native-fs'
+import {showToast} from '../components/ToastRootSibling'
 
 async function hasAndroidPermission() {
   const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
@@ -14,6 +15,7 @@ async function hasAndroidPermission() {
   return status === 'granted';
 }
 
+
 export const saveImageToPhoto = async(imageUrl)=>{
   downLoad(imageUrl,'png')
 }
@@ -23,36 +25,47 @@ export const saveVideoToPhoto = async (videouRL)=>{
 const downLoad = async (url,type)=>{
   if (Platform.OS === "android" && !(await hasAndroidPermission())) {
     // 提示
+    showToast("请打开相册权限：打开后即可把图片和视频保存到相册哦")
     return;
   }
-  let timestamp = (new Date()).getTime();
-  let random = String(((Math.random() * 1000000) | 0))
-  let dirs = Platform.OS === 'ios' ? RNFS.DocumentDirectoryPath : 'file://' + RNFS.ExternalStorageDirectoryPath;
-  const toPath = `${dirs}/${timestamp+random}.${type}`;
-  console.log('url==',url);
-  console.log('toPath==',toPath);
-  const options = {
-    fromUrl: url,
-    toFile: toPath,
-    background: true,
-    begin: (res) => {
-    },
-    progress: (res) => {
-    }
-  };
-  try {
-    const ret = RNFS.downloadFile(options);
-    ret.promise.then(res => {
-      const filePath = toPath.startsWith('file://') ? toPath : 'file://' + toPath 
-      console.log('filePath===',filePath);
-      CameraRoll.save(filePath).then(function(result) {
-        console.log('saveToCameraRoll success');
-        RNFS.unlink(toPath)
-      }).catch(function(error) {
-          console.log(' saveToCameraRollerror', error);
+  showToast('正在保存...')
+  if(url.startsWith("http")){
+    // 网络图片
+    let timestamp = (new Date()).getTime();
+    let random = String(((Math.random() * 1000000) | 0))
+    let dirs = Platform.OS === 'ios' ? RNFS.DocumentDirectoryPath : 'file://' + RNFS.ExternalStorageDirectoryPath;
+    const toPath = `${dirs}/${timestamp+random}.${type}`;
+    const options = {
+      fromUrl: url,
+      toFile: toPath,
+      background: true,
+      begin: (res) => {
+      },
+      progress: (res) => {
+      }
+    };
+    try {
+      const ret = RNFS.downloadFile(options);
+      ret.promise.then(res => {
+        const filePath = toPath.startsWith('file://') ? toPath : 'file://' + toPath 
+        CameraRoll.save(filePath).then(function(result) {
+          showToast('已保存到相册')
+          RNFS.unlink(toPath)
+        }).catch(function(error) {
+            console.log(' saveToCameraRollerror', error);
+        });
+      }).catch(err => {
       });
-    }).catch(err => {
+    } catch (e) {
+    }
+  }else {
+    // 我的下载中的图片
+    const filePath = url.startsWith('file://') ? url : 'file://' + url 
+    CameraRoll.save(filePath).then(function(result) {
+      showToast('已保存到相册')
+      RNFS.unlink(toPath)
+    }).catch(function(error) {
+        console.log(' saveToCameraRollerror', error);
     });
-  } catch (e) {
   }
 }

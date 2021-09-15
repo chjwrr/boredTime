@@ -1,5 +1,6 @@
 import { PermissionsAndroid, Platform } from "react-native";
 import CameraRoll from "@react-native-community/cameraroll";
+import RNFS from 'react-native-fs'
 
 import axios from 'axios'
 
@@ -40,7 +41,8 @@ export const getDN_imageInfo=()=>{
     request.get('https://api.asilu.com/bg/')
     .then((response)=>{
       resolve(response.data)
-    }).catch(()=>{
+    }).catch((e)=>{
+      console.log('e===',e);
     })
   })
 }
@@ -59,9 +61,6 @@ export const getJoker_imageInfo=(page)=>{
     })
   })
 }
-
-
-
 
 
 // // 获取远端图片

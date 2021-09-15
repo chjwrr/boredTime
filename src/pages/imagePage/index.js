@@ -19,25 +19,33 @@ export default ImagePage = ({navigation}) => {
         <Text style={styles.title}>电脑壁纸</Text>
       </RowCenterView>
     </TouchableOpacity>
-    <TouchableOpacity activeOpacity={0.8} style={styles.itemView}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.itemView} onPress={()=>{
+      navigation.navigate('ImageWallPaper',{type:3})
+    }}>
       <Image style={styles.icon} source={ImageCommon.sjbz}/>
       <RowCenterView style={styles.centerView}>
         <Text style={styles.title}>手机壁纸</Text>
       </RowCenterView>
     </TouchableOpacity>
-    <TouchableOpacity activeOpacity={0.8} style={styles.itemView}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.itemView} onPress={()=>{
+      navigation.navigate('ImageWallPaper',{type:4})
+    }}>
       <Image style={styles.icon} source={ImageCommon.mtbz}/>
       <RowCenterView style={styles.centerView}>
         <Text style={styles.title}>美图</Text>
       </RowCenterView>
     </TouchableOpacity>
-    <TouchableOpacity activeOpacity={0.8} style={styles.itemView}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.itemView} onPress={()=>{
+      navigation.navigate('ImageWallPaper',{type:1})
+    }}>
       <Image style={styles.icon} source={ImageCommon.pzbz}/>
       <RowCenterView style={styles.centerView}>
         <Text style={styles.title}>P站</Text>
       </RowCenterView>
     </TouchableOpacity>
-    <TouchableOpacity activeOpacity={0.8} style={styles.itemView}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.itemView} onPress={()=>{
+      navigation.navigate('ImageWallPaper',{type:2})
+    }}>
       <Image style={styles.icon} source={ImageCommon.dm}/>
       <RowCenterView style={styles.centerView}>
         <Text style={styles.title}>二次元</Text>

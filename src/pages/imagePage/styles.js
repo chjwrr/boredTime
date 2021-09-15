@@ -48,6 +48,32 @@ const styles = StyleSheet.create({
   },
   renderTitle:{
     color:'white'
+  },
+  phoneImage:{
+    width,
+    height
+  },
+  downImage:{
+    width:20,
+    height:20,
+  },
+  downBtn:{
+    width:40,
+    height:40,
+    position:'absolute',
+    right:20,
+    bottom:40,
+    alignItems:'flex-end',
+    justifyContent:'center'
+  },
+  gobackBtn:{
+    width:40,
+    height:40,
+    position:'absolute',
+    right:20,
+    bottom:80,
+    alignItems:'flex-end',
+    justifyContent:'center'
   }
 })
 export default styles

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Text,
   View,
@@ -7,11 +7,11 @@ import {
 } from 'react-native'
 import styles from './styles'
 import {MainFullView} from '../../components/MainView'
-
 const {width,height} = Dimensions.get('window')
-
 export default VideoPage = ({navigation}) => {
 
+  useEffect(()=>{
+  },[])
 
   const renderItem = ({item,index})=>{
     return <View style={{
@@ -34,12 +34,6 @@ export default VideoPage = ({navigation}) => {
       getItemLayout={(data, index) => (
         {length: height, offset: height * index, index}
       )}
-      viewabilityConfig={{
-        viewAreaCoveragePercentThreshold:80
-      }}
-      onViewableItemsChanged={(info)=>{
-
-      }}
     />
   </MainFullView>
 }

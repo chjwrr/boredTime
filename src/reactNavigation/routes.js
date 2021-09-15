@@ -6,6 +6,7 @@ import TextList from '../pages/TextPage'
 import Game from '../pages/gamePage'
 import DNImagePage from '../pages/imagePage/DN_imagePage'
 import JokerImagePage from '../pages/imagePage/Joker_imagePage'
+import ImageWallPaper from '../pages/imagePage/ImageWallPaper'
 
 export default Routers = [
   {
@@ -46,5 +47,9 @@ export default Routers = [
     name:'JokerImage',
     component:JokerImagePage,
     headerShown:true
+  },{
+    name:'ImageWallPaper',
+    component:ImageWallPaper,
+    headerShown:false
   }
 ]

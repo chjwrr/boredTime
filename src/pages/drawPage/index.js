@@ -5,7 +5,8 @@ import {
   StatusBar,
   Image,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Platform
 } from 'react-native'
 import Geolocation from '@react-native-community/geolocation';
 import MainView,{RowView,RowBetweenView,RowFixedView,ColumnView} from '../../components/MainView'
@@ -16,10 +17,14 @@ import {weatherIcon} from '../../common/constValue'
 import MenuImageCommon from '../../assets/images/menu/MenuImageCommon'
 import { DrawerActions } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
+import { showToast } from '../../components/ToastRootSibling';
 
 const WeatherView = ()=>{
   const [weatherInfo,setWeatherInfo] = useState()
   React.useEffect(()=>{
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
+    }
     Geolocation.getCurrentPosition(info => {
       if (info && info.coords){
         getAddressInfo(info.coords.latitude,info.coords.longitude).then((cityname)=>{
@@ -28,6 +33,8 @@ const WeatherView = ()=>{
           })
         })
       }
+    },(e)=>{
+      showToast("请检查是否有定位权限：用于获取当前城市天气信息")
     });
   },[])
   return <RowView>

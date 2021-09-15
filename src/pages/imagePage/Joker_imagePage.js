@@ -19,7 +19,9 @@ export default DNImagePage = ({navigation}) => {
   const [showImages,setShowImage] = useState([])
   const [showIndex,setShowIndex] = useState(0)
   const allPages = useRef(0)
-  const [page,setPage] = useState(1)
+  // const [page,setPage] = useState(parseInt(Math.random() * 10) + 1)
+  const [page,setPage] = useState(18)
+
   const loading = useRef(false)
 
   const [visible,setVisible] = useState(false)
@@ -31,13 +33,15 @@ export default DNImagePage = ({navigation}) => {
     })
   },[navigation])
 
-
   useEffect(()=>{
     if (loading.current){
       return
     }
     loading.current = true
     getJoker_imageInfo(page).then((res)=>{
+      if (res.contentlist.length == 0){
+        return
+      }
       const result = flatData.concat(res.contentlist)
       setFlatData(result)
       const images = res.contentlist.map((item)=>{
@@ -55,6 +59,9 @@ export default DNImagePage = ({navigation}) => {
   },[page])
 
   const onEndReached=()=>{
+    if (page >= allPages.current){
+      return
+    }
     setPage((pre)=>pre + 1)
   }
 

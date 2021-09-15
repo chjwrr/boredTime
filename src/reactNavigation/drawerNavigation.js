@@ -20,7 +20,7 @@ const DrawStackEnter = () => {
           width: drawWidth,
         },
         drawerType:'back',
-        swipeEdgeWidth:swipeWidth
+        swipeEdgeWidth:swipeWidth,
       }}
       drawerContent={()=><DrawPage/>}
       >
