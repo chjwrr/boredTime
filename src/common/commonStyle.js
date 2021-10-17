@@ -32,6 +32,11 @@ export const Row = StyleSheet.create({
     width:'100%',
     flexDirection:'row',
     alignItems:'flex-end',
+  },
+  end:{
+    width:'100%',
+    flexDirection:'row',
+    justifyContent:'flex-end'
   }
 })
 export const Column = StyleSheet.create({

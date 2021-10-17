@@ -1,7 +1,6 @@
 import {
   StyleSheet
 } from 'react-native'
-import {drawWidth} from '../../common/constValue'
 export default styles = StyleSheet.create({
   body:{
     flex:1,

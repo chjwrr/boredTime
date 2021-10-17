@@ -7,7 +7,9 @@ const Stack = createNativeStackNavigator()
 const RenderRouter = ()=>{
   return Routers.map((item)=>{
     return <Stack.Screen key={item.name} name={item.name} component={item.component} options={{
-      headerShown:item.headerShown
+      headerShown:item.headerShown,
+      title:item.headerShown ? item.headerTitle : '',
+      headerBackTitleVisible:false
     }}/>
   })
 }

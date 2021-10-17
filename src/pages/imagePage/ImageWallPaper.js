@@ -1,15 +1,11 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,
   FlatList,
-  SafeAreaView,
-  Modal,
   PanResponder,
   Animated,
-  Easing,
   Dimensions
 } from 'react-native'
 import styles from './styles'
@@ -20,7 +16,8 @@ import MTWallPaperData from '../../assets/json/MTWallPaper.json'
 
 import {photoSwipeMinHeight} from '../../common/constValue'
 import ImageCommon from '../../assets/images/common/ImageCommon'
-import {saveImageToPhoto} from '../../common/downloadSave'
+import {showToast} from '../../components/ToastRootSibling'
+import DownButton from '../../components/DownButton'
 
 
 const {height} = Dimensions.get('window')
@@ -89,18 +86,15 @@ export default ImageWallPaper = ({navigation,route}) => {
       if (pageRef.current == 0){
         if (y > 0){
           // 第一页，向下滑动
-          console.log('显示刷新数据');
           return
         }
       }
       if(pageRef.current == imageList.length - 1){
         if (y < 0){
           // 最后一页，向上滑动
-          console.log('显示加载更多数据页面');
           return
         }
       }
-      console.log('滑动了',y);
       flatListRef.current.scrollToOffset({animated: false,offset: pageRef.current*height - y})
     },
     // 手指松开
@@ -111,16 +105,16 @@ export default ImageWallPaper = ({navigation,route}) => {
         if (y < 0){
           if(pageRef.current == imageList.length - 1){
             // 滑动到底部，触发加载更多
-            console.log('加载更多数据');
+            showToast('正在加载...')
             setImageList(imageList.concat(getImageList(route.params.type)))
             return
           }
           pageRef.current += 1
         }else {
-          console.log('向下滑动了',y);
           if (pageRef.current == 0){
-            // 第0页，向下滑动，触发刷新操作
-            console.log('刷新数据');
+            pageRef.current = 0
+            showToast('正在刷新...')
+            setImageList(getImageList(route.params.type))
             return
           }
           pageRef.current -= 1
@@ -137,19 +131,7 @@ export default ImageWallPaper = ({navigation,route}) => {
     },
   });
 
-  const scaleAnimated = useRef(new Animated.Value(1))
-
   const [imageList,setImageList] = useState(getImageList(route.params.type))
-  useEffect(()=>{
-    // scaleAnimated.current.setValue(1)
-    // Animated.timing(scaleAnimated.current,{
-    //   toValue:0.8,
-    //   useNativeDriver:true,
-    //   duration: 200,
-    //   friction:1
-    // }).start()
-  },[])
-  
   const flatListRef = useRef()
   const pageRef = useRef(0)
 
@@ -157,19 +139,13 @@ export default ImageWallPaper = ({navigation,route}) => {
      <FlatList ref={flatListRef}
         data={imageList}
         renderItem={({ item, index }) => {
-          return <Animated.Image resizeMode={'contain'}  style={[styles.phoneImage,{
-            // transform:[{scale:scaleAnimated.current}],
-          }]} 
-          source={{uri:item}}
-        />
+          return <RenderItem item={item}/>
         }}
         getItemLayout={(data, index) => (
           { length: height, offset: height * index, index }
         )}
         scrollEnabled={false}
         keyExtractor={(item, index) => item}
-        onViewableItemsChanged={this.onViewableItemsChanged}
-        viewabilityConfig={this.viewabilityConfig}
         showsVerticalScrollIndicator={false}
         removeClippedSubviews={true}
       />
@@ -179,10 +155,14 @@ export default ImageWallPaper = ({navigation,route}) => {
       }}>
         <Image style={styles.downImage} source={ImageCommon.goback_icon}/>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.downBtn} onPress={()=>{
-        saveImageToPhoto(imageList[pageRef.current])
-      }}>
-        <Image style={styles.downImage} source={ImageCommon.download_icon}/>
-      </TouchableOpacity>
+      <DownButton type={'image'} url={()=>imageList[pageRef.current]}/>
   </View>
+}
+function RenderItem({item}){
+  return useMemo(()=>{
+    return <Animated.Image resizeMode={'contain'}  style={[styles.phoneImage,{
+      // transform:[{scale:scaleAnimated.current}],
+    }]} 
+    source={{uri:item}}/>
+  },[item])
 }

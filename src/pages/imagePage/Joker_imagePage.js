@@ -20,7 +20,7 @@ export default DNImagePage = ({navigation}) => {
   const [showIndex,setShowIndex] = useState(0)
   const allPages = useRef(0)
   // const [page,setPage] = useState(parseInt(Math.random() * 10) + 1)
-  const [page,setPage] = useState(18)
+  const [page,setPage] = useState(0)
 
   const loading = useRef(false)
 
@@ -51,14 +51,18 @@ export default DNImagePage = ({navigation}) => {
         }
       })
       setShowImage(showImages.concat(images))
-      allPages.current == res.allPages
+      allPages.current = res.allPages
       loading.current = false
+
     }).catch(()=>{
       loading.current = false
     })
   },[page])
 
   const onEndReached=()=>{
+    console.log('pagepage===',page);
+    console.log('allPages.current===',allPages.current);
+
     if (page >= allPages.current){
       return
     }

@@ -22,6 +22,10 @@ target 'boredTime' do
 
   pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
 
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
+  pod 'RNCClipboard', :path => '../node_modules/@react-native-community/clipboard'
+
   target 'boredTimeTests' do
     inherit! :complete
     # Pods for testing

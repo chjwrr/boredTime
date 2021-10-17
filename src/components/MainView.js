@@ -77,8 +77,26 @@ export const RowCenterView = (props)=>{
     }
   </View>
 }
+export const RowEndView = (props)=>{
+  return <View style={[Row.end,props.style]}>
+    {
+      React.Children.map(props.children,(child,index)=>{
+        return child
+      })
+    }
+  </View>
+}
 export const ColumnView = (props)=>{
   return <View style={[Column.self,props.style]}>
+    {
+      React.Children.map(props.children,(child,index)=>{
+        return child
+      })
+    }
+  </View>
+}
+export const ColumnCenterView = (props)=>{
+  return <View style={[Column.center,props.style]}>
     {
       React.Children.map(props.children,(child,index)=>{
         return child

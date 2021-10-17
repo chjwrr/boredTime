@@ -1,0 +1,79 @@
+import {StyleSheet} from 'react-native'
+import {screenWidth,mainColor,color_cdcdcd} from '../../common/constValue'
+const styles = StyleSheet.create({
+  image:{
+    width:120,
+    height:120,
+  },
+  itemView:{
+    width:screenWidth/2,
+    height:screenWidth/2,
+  },
+  title:{
+    marginTop:10,
+    fontSize:17,
+  },
+  title_show:{
+    marginTop:10,
+    color:color_cdcdcd,
+    fontSize:17,
+    fontWeight:'bold'
+  },
+  imageView:{
+    marginTop:50
+  },
+  result:{
+    marginTop:30,
+    fontSize:30,
+    fontWeight:'bold',
+    color:mainColor
+  },
+  arrowImage:{
+    width:40,
+    height:40,
+    marginRight:15
+  },
+  textInput:{
+    height:44,
+    width:'100%',
+    backgroundColor:color_cdcdcd,
+    fontSize:20
+  },
+  container: {
+    flex: 1,
+    backgroundColor:'white',
+  },
+  inner: {
+    flex:1,
+    justifyContent:'space-between',
+    paddingBottom:100
+  },
+  hitokoto:{
+    marginHorizontal:30,
+    lineHeight:30,
+    fontSize:20,
+    fontWeight:'bold'
+  },
+  mainView:{
+    flexDirection:'column',
+    justifyContent:'center',
+    paddingBottom:100
+  },
+  from:{
+    color:color_cdcdcd,
+    fontSize:12,
+    marginTop:30
+  },
+  backTitle:{
+    lineHeight:30,
+    fontSize:15,
+  },
+  backContent:{
+    lineHeight:30,
+    fontSize:20,
+    fontWeight:'bold',
+    color:mainColor,
+    marginTop:30
+  }
+})
+export default styles

@@ -16,16 +16,17 @@ async function hasAndroidPermission() {
 }
 
 
-export const saveImageToPhoto = async(imageUrl)=>{
-  downLoad(imageUrl,'png')
+export const saveImageToPhoto = async(imageUrl,callBack)=>{
+  downLoad(imageUrl,'png',callBack)
 }
-export const saveVideoToPhoto = async (videouRL)=>{
-  downLoad(videouRL,'mp4')
+export const saveVideoToPhoto = async (videouRL,callBack)=>{
+  downLoad(videouRL,'mp4',callBack)
 }
-const downLoad = async (url,type)=>{
+const downLoad = async (url,type,callBack)=>{
   if (Platform.OS === "android" && !(await hasAndroidPermission())) {
     // 提示
     showToast("请打开相册权限：打开后即可把图片和视频保存到相册哦")
+    callBack()
     return;
   }
   showToast('正在保存...')
@@ -51,12 +52,17 @@ const downLoad = async (url,type)=>{
         CameraRoll.save(filePath).then(function(result) {
           showToast('已保存到相册')
           RNFS.unlink(toPath)
+          callBack()
         }).catch(function(error) {
             console.log(' saveToCameraRollerror', error);
+            showToast('保存失败')
+            callBack()
         });
       }).catch(err => {
+        callBack()
       });
     } catch (e) {
+      callBack()
     }
   }else {
     // 我的下载中的图片
@@ -64,8 +70,10 @@ const downLoad = async (url,type)=>{
     CameraRoll.save(filePath).then(function(result) {
       showToast('已保存到相册')
       RNFS.unlink(toPath)
+      callBack()
     }).catch(function(error) {
         console.log(' saveToCameraRollerror', error);
+        callBack()
     });
   }
 }

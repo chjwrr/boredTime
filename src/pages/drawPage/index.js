@@ -95,7 +95,7 @@ const menuInfos = [
   },
   {
     image:MenuImageCommon.menu_game,
-    title:'游戏',
+    title:'娱乐',
     color:'#ffe600',
     bgColor:'#dec674',
     toPath:'game'

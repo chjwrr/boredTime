@@ -1,19 +1,20 @@
 import {StyleSheet,Dimensions} from 'react-native'
-const {width,height} = Dimensions.get('window')
-const itemHeight = height / 3
+import {screenWidth,screenHeight} from '../../common/constValue'
+const itemHeight = screenHeight / 3
+
 const styles = StyleSheet.create({
   body:{
     flexDirection:'row',
     flexWrap:'wrap'
   },
   itemView:{
-    width:width/2,
+    width:screenWidth/2,
     height:itemHeight,
     alignItems:'center',
     justifyContent:'center'
   },
   icon:{
-    width:width/2,
+    width:screenWidth/2,
     height:itemHeight,
     position:'absolute',
     top:0,
@@ -50,21 +51,12 @@ const styles = StyleSheet.create({
     color:'white'
   },
   phoneImage:{
-    width,
-    height
+    width:screenWidth,
+    height:screenHeight
   },
   downImage:{
-    width:20,
-    height:20,
-  },
-  downBtn:{
     width:40,
     height:40,
-    position:'absolute',
-    right:20,
-    bottom:40,
-    alignItems:'flex-end',
-    justifyContent:'center'
   },
   gobackBtn:{
     width:40,
@@ -73,7 +65,8 @@ const styles = StyleSheet.create({
     right:20,
     bottom:80,
     alignItems:'flex-end',
-    justifyContent:'center'
+    justifyContent:'center',
+    zIndex:1
   }
 })
 export default styles

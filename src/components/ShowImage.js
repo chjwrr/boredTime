@@ -11,7 +11,7 @@ import {
 import ImageViewer from 'react-native-image-zoom-viewer'
 import {saveImageToPhoto} from '../common/downloadSave'
 import ImageCommon from '../assets/images/common/ImageCommon'
-
+import DownButton from '../components/DownButton'
 export default MainView = (props) => {
   const currentIndex = useRef(props.index)
   useEffect(()=>{
@@ -28,11 +28,7 @@ export default MainView = (props) => {
       currentIndex.current = index
     }}
     />
-    <TouchableOpacity onPress={()=>{
-      saveImageToPhoto(props.images[currentIndex.current].url)
-    }}>
-      <Image style={styles.downImage} source={ImageCommon.download_icon}/>
-    </TouchableOpacity>
+    <DownButton type={'image'} url={()=>props.images[currentIndex.current].url}/>
   </Modal>
 }
 const styles = StyleSheet.create({
@@ -50,6 +46,7 @@ const styles = StyleSheet.create({
     height:20,
     position:'absolute',
     right:10,
-    bottom:80
+    bottom:80,
+    zIndex:1
   }
 })

@@ -1,4 +1,4 @@
-import RNFS from 'react-native-fs'
+import RNFS, { readFileRes } from 'react-native-fs'
 
 import axios from 'axios'
 
@@ -129,6 +129,46 @@ export const getImage3Test=()=>{
      RNFS.appendFile(erciyuanPath, res + ',', 'utf8').then((res)=>{
      }).catch((e)=>{
      })
+   })
+ }, timer);
+}
+
+
+
+
+//视频
+const getImage4=()=>{
+  let random = parseInt(Math.random() * 6)
+
+  let url = [
+    'https://api.iyk0.com/dsp/?type=网红',
+    'https://api.iyk0.com/dsp/?type=明星',
+    'https://api.iyk0.com/dsp/?type=热舞',
+    'https://api.iyk0.com/dsp/?type=风景',
+    'https://api.iyk0.com/dsp/?type=游戏',
+    'https://api.iyk0.com/dsp/?type=动物'
+  ]
+
+  return new Promise((resolve, reject)=>{
+    request.get(url[random])
+    .then((response)=>{
+      resolve(response.data)
+    }).catch((e)=>{
+      reject()
+    })
+  })
+}
+let videoPath = RNFS.DocumentDirectoryPath + '/video.json'
+// console.log('videoPath',videoPath);
+export const getImage4Test=()=>{
+  setInterval(() => {
+    getImage4().then((res)=>{
+      console.log('resresres=',res);
+      if (res && res.code == '200' && res.img){
+        RNFS.appendFile(videoPath, JSON.stringify(res) + ',', 'utf8').then((res)=>{
+        }).catch((e)=>{
+        })
+      }
    })
  }, timer);
 }

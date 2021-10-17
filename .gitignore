@@ -1,7 +1,8 @@
 # OSX
 #
 .DS_Store
-
+~/.android/
+~/.gradle/
 # Xcode
 #
 build/
