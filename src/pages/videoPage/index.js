@@ -17,6 +17,7 @@ import {getVideoData} from '../../common/axios'
 import {photoSwipeMinHeight} from '../../common/constValue'
 import {showToast} from '../../components/ToastRootSibling'
 import DownButton from '../../components/DownButton'
+import VideoPlay from '../../components/VideoPlay'
 
 const {height} = Dimensions.get('window')
 
@@ -86,6 +87,12 @@ export default VideoPage = ({navigation,route}) => {
     onPanResponderRelease: (evt, gestureState) => {
       // this.endTime = evt.nativeEvent.timestamp
       let y = gestureState.dy
+      
+      // 暂停上一个
+      if (videoRef[pageRef.current] && videoRef[pageRef.current].current){
+        videoRef[pageRef.current].current.onChangeVideoStatusPause()
+      }
+
       if (Math.abs(y) > photoSwipeMinHeight){
         if (y < 0){
           if(pageRef.current == videoList.length - 1){
@@ -95,6 +102,12 @@ export default VideoPage = ({navigation,route}) => {
             return
           }
           pageRef.current += 1
+
+          // 当前的播放
+          if (videoRef[pageRef.current] && videoRef[pageRef.current].current){
+            videoRef[pageRef.current].current.onChangeVideoStatusPlay()
+          }
+
         }else {
           if (pageRef.current == 0){
             // 第0页，向下滑动，触发刷新操作
@@ -104,6 +117,10 @@ export default VideoPage = ({navigation,route}) => {
             return
           }
           pageRef.current -= 1
+          // 当前的播放
+          if (videoRef[pageRef.current] && videoRef[pageRef.current].current){
+            videoRef[pageRef.current].current.onChangeVideoStatusPlay()
+          }
         }
       }
       flatListRef.current.scrollToOffset({animated: true,offset: pageRef.current*height})
@@ -118,6 +135,9 @@ export default VideoPage = ({navigation,route}) => {
   });
 
   const [videoList,setVideoList] = useState([])
+  const [videoRef,setVideoRef] = useState([])
+  const [isHas,setIsHas] = useState(true)
+
   const flatListRef = useRef()
   const pageRef = useRef(0)
 
@@ -127,22 +147,35 @@ export default VideoPage = ({navigation,route}) => {
 
   async function loadVodeoData(add){
     const result = await getVideoList()
-    if (add){
-      pageRef.current += 1
-      setVideoList(videoList.concat([result]))
-      setTimeout(() => {
-        flatListRef.current.scrollToOffset({animated: true,offset: pageRef.current*height})
-      }, 200);
+    if (result.img){
+      if (add){
+        pageRef.current += 1
+        setVideoList(videoList.concat([result]))
+        setTimeout(() => {
+          flatListRef.current.scrollToOffset({animated: true,offset: pageRef.current*height})
+        }, 200);
+      }else {
+        setVideoList([result])
+      }
+      setIsHas(true)
     }else {
-      setVideoList([result])
+      setIsHas(false)
     }
+    
   }
 
   return <View style={{flex:1,backgroundColor:'black'}} {...panResponder.panHandlers} >
      <FlatList ref={flatListRef}
         data={videoList}
         renderItem={({ item, index }) => {
-          return <RenderItem item={item}/>
+          return <VideoPlay item={item} onBackRef={(ref)=>{
+            setVideoRef(videoRef.concat([ref]))
+          }} onSetPlayStatus={()=>{
+            console.log('=================',videoRef);
+            if (videoRef[index] && videoRef[index].current){
+              videoRef[index].current.onChangeVideoStatus()
+            }
+          }}/>
         }}
         getItemLayout={(data, index) => (
           { length: height, offset: height * index, index }
@@ -151,11 +184,17 @@ export default VideoPage = ({navigation,route}) => {
         keyExtractor={(item, index) => item.img + index}
         showsVerticalScrollIndicator={false}
         removeClippedSubviews={true}
+        ListFooterComponent={<></>}
       />
+      {
+        !isHas && <TouchableOpacity style={styles.reButton} onPress={loadVodeoData}>
+          <Text style={{color:'#fff'}}>点击刷新</Text>
+        </TouchableOpacity>
+      }
      <DownButton type={'video'} url={()=>videoList[pageRef.current]?.url}/>
   </View>
 }
-function RenderItem({item}){
+function RenderImageItem({item}){
   return useMemo(()=>{
     return <Image resizeMode={'cover'}  style={[styles.phoneImage,{
     }]} 

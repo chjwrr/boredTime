@@ -14,6 +14,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B556B6D39633D578FFFD3997 /* libPods-boredTime-boredTimeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA89E952A6B29A61C72286D4 /* libPods-boredTime-boredTimeTests.a */; };
 		C601B3AF26EE582C00B73305 /* libreact-native-cameraroll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C601B3AE26EE582C00B73305 /* libreact-native-cameraroll.a */; };
+		C699FDE0271FF77500FDFF45 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C699FDDE271FF77000FDFF45 /* AVFoundation.framework */; };
 		FCAC332F7B4AC6CA8EF580DC /* libPods-boredTime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCAB996B83C13CBD887788FB /* libPods-boredTime.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		BCAB996B83C13CBD887788FB /* libPods-boredTime.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-boredTime.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C601B3A726EE576800B73305 /* RNCCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCCameraRoll.xcodeproj; path = "../node_modules/@react-native-community/cameraroll/ios/RNCCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		C601B3AE26EE582C00B73305 /* libreact-native-cameraroll.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-cameraroll.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C699FDDE271FF77000FDFF45 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C699FDE0271FF77500FDFF45 /* AVFoundation.framework in Frameworks */,
 				C601B3AF26EE582C00B73305 /* libreact-native-cameraroll.a in Frameworks */,
 				FCAC332F7B4AC6CA8EF580DC /* libPods-boredTime.a in Frameworks */,
 			);
@@ -110,6 +113,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C699FDDE271FF77000FDFF45 /* AVFoundation.framework */,
 				C601B3AE26EE582C00B73305 /* libreact-native-cameraroll.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				BCAB996B83C13CBD887788FB /* libPods-boredTime.a */,

@@ -62,6 +62,19 @@ const styles = StyleSheet.create({
     bottom:80,
     alignItems:'flex-end',
     justifyContent:'center'
+  },
+  video:{
+    width:screenWidth,
+    height:screenHeight,
+  },
+  reButton:{
+    position:'absolute',
+    bottom:150,
+    left:0,
+    right:0,
+    justifyContent:'center',
+    alignItems:'center',
+    height:44
   }
 })
 export default styles

@@ -126,15 +126,13 @@ export const getVideoData=()=>{
     .then((response)=>{
       console.log('response.data=',response.data);
       if (response.data.code == 200){
-        if (response.data.img){
-          resolve(response.data)
-        }
+        resolve(response.data)
       }else {
-        reject()
+        resolve({})
       }
       hideToast()
     }).catch((e)=>{
-      reject()
+      resolve({})
       hideToast()
     })
   })
@@ -214,3 +212,68 @@ export const getGoldBack=()=>{
     })
   })
 }
+
+/**获取暖文 */
+export const getTextWarm=(lastId)=>{
+  console.log('lastId===',lastId);
+  return new Promise((resolve, reject)=>{
+    showToast('正在加载...')
+    request.get(`https://qianming.sinaapp.com/index.php/AndroidApi10/index/cid/qutu/lastId/${lastId}`)
+    .then((response)=>{
+      if (lastId == 0){
+        if (response.data.totalRow > 0){
+          resolve(response.data.rows)
+        }else {
+          reject()
+        }
+      }else {
+        if (response.data.length > 0){
+          resolve(response.data)
+        }else {
+          reject()
+        }
+      }
+      hideToast()
+    }).catch((e)=>{
+      reject()
+      hideToast()
+    })
+  })
+}
+/**获取美文 */
+export const getBeatiText=(page)=>{
+  return new Promise((resolve, reject)=>{
+    showToast('正在加载...')
+    request.get(`https://v2.alapi.cn/api/mryw/list?token=QAmJCzjq1B8v1eAh&page=${page}`)
+    .then((response)=>{
+      if (response.data.code == 200){
+        resolve(response.data.data)
+      }else {
+        reject()
+      }
+      hideToast()
+    }).catch((e)=>{
+      reject()
+      hideToast()
+    })
+  })
+}
+/**获取美文 */
+export const getENCNText=()=>{
+  return new Promise((resolve, reject)=>{
+    showToast('正在加载...')
+    request.get('http://route.showapi.com/1211-1?showapi_appid=49376&showapi_sign=9716aac181fa4252896941e392c9dbcb&count=10')
+    .then((response)=>{
+      if (response.data.showapi_res_code == 0 && response.data.showapi_res_body.ret_code == 0){
+        resolve(response.data.showapi_res_body.data)
+      }else {
+        reject()
+      }
+      hideToast()
+    }).catch((e)=>{
+      reject()
+      hideToast()
+    })
+  })
+}
+

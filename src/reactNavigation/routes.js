@@ -12,6 +12,7 @@ import ImageToContent from '../pages/gamePage/ImageToContent'
 import DogDetail from '../pages/gamePage/DogDetail'
 import GoldBack from '../pages/gamePage/GoldBack'
 import OneWorld from '../pages/gamePage/OneWorld'
+import TextDetail from '../pages/TextPage/TextDetail'
 
 
 export default Routers = [
@@ -83,6 +84,10 @@ export default Routers = [
     component:DogDetail,
     headerShown:true,
     headerTitle:'舔狗日记'
+  },{
+    name:'TextDetail',
+    component:TextDetail,
+    headerShown:true,
   }
 ]
 

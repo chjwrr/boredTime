@@ -51,6 +51,7 @@ export const newTopItemWidth = width / 7 // 新闻分类宽度
 export const newTopItemHeight = 44 // 新闻分类高度
 export const newTopLineHeight = 2 // 新闻分类下划线高度
 export const newItemHeight = 100 // 新闻item的高度
+export const textTopItemWidth = width / 3 // 文本分类宽度
 
 export const weatherIcon = (name,type)=>{
   return 'http://www.weather.com.cn/m2/i/icon_weather/29x20/' + type + name + '.gif'

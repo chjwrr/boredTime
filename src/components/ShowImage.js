@@ -12,7 +12,7 @@ import ImageViewer from 'react-native-image-zoom-viewer'
 import {saveImageToPhoto} from '../common/downloadSave'
 import ImageCommon from '../assets/images/common/ImageCommon'
 import DownButton from '../components/DownButton'
-export default MainView = (props) => {
+export default ShowImage = (props) => {
   const currentIndex = useRef(props.index)
   useEffect(()=>{
     currentIndex.current = props.index

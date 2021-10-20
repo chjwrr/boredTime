@@ -9,6 +9,17 @@ export const getContentFromHtmlText = (html)=>{
     return a
  });
 }
+export const getNContentFromHtmlText = (html)=>{
+  // content=content.replace(/<\/?p[^>]*>/gi,'')
+  return html.match(/<p(.*?)<\/p>/g).map(function(val){
+    let a = val.replace(/<\/?[^>]*>/gi,'\n')
+    a = a.replace(/&.*?;/gi,' ')
+
+    // a = a.replace(/&nbsp;/gi,' ')
+    // a = a.replace(/&amp;/gi,' ')
+    return a
+ });
+}
 export const getImagesFromHtmlText = (html)=>{
   //匹配图片（g表示匹配所有结果i表示区分大小写）
   let imgReg = /<img.*?(?:>|\/>)/gi;

@@ -7,6 +7,7 @@ import {
   Animated
 } from 'react-native'
 import ImageCommon from '../assets/images/common/ImageCommon'
+import { BottomSafeArea } from '../common/constValue'
 import {saveImageToPhoto,saveVideoToPhoto} from '../common/downloadSave'
 
 
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     height:40,
     position:'absolute',
     right:20,
-    bottom:40,
+    bottom:BottomSafeArea + 30,
     alignItems:'flex-end',
     justifyContent:'center',
     zIndex:1
