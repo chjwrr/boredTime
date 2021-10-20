@@ -46,3 +46,4 @@ yarn-error.log
 
 # CocoaPods
 /ios/Pods/
+/ios/Podfile.lock
