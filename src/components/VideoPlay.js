@@ -27,10 +27,10 @@ export default VideoPlay =({item,onBackRef,onSetPlayStatus})=>{
     onChangeVideoStatus:()=>{
       setIsPaused(!isPaused)
     },
-    onChangeVideoStatusPause:()=>{
+    onChangeVideoStatusPlay:()=>{
       setIsPaused(false)
     },
-    onChangeVideoStatusPlay:()=>{
+    onChangeVideoStatusPause:()=>{
       setIsPaused(true)
     }
   }))
@@ -66,10 +66,10 @@ export default VideoPlay =({item,onBackRef,onSetPlayStatus})=>{
         paused={isPaused}
       />
      <View style={styles.playButton}>
-        <TouchableOpacity style={{width:'100%',height:'100%'}} onPress={()=>{
+        {/* <TouchableOpacity style={{width:'100%',height:'100%'}} onPress={()=>{
           onSetPlayStatus()
         }}>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
      </View>
       <RowView style={styles.controlView}>
         <Text style={styles.timer}>{currentTime}s</Text>

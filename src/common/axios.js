@@ -276,4 +276,23 @@ export const getENCNText=()=>{
     })
   })
 }
+/**获取音乐 */
+export const getMusic=()=>{
+  return new Promise((resolve, reject)=>{
+    showToast('正在加载...')
+    request.get('https://api.uomg.com/api/rand.music?sort=热歌榜&format=json')
+    .then((response)=>{
+      if (response.data.code == 1 && response.data.data){
+        resolve(response.data.data)
+      }else {
+        reject()
+      }
+      hideToast()
+    }).catch((e)=>{
+      reject()
+      hideToast()
+    })
+  })
+}
+
 

@@ -87,13 +87,12 @@ export default VideoPage = ({navigation,route}) => {
     onPanResponderRelease: (evt, gestureState) => {
       // this.endTime = evt.nativeEvent.timestamp
       let y = gestureState.dy
-      
-      // 暂停上一个
-      if (videoRef[pageRef.current] && videoRef[pageRef.current].current){
-        videoRef[pageRef.current].current.onChangeVideoStatusPause()
-      }
 
       if (Math.abs(y) > photoSwipeMinHeight){
+        // 暂停上一个
+        if (videoRef.current[pageRef.current] && videoRef.current[pageRef.current].current){
+          videoRef.current[pageRef.current].current.onChangeVideoStatusPause()
+        }
         if (y < 0){
           if(pageRef.current == videoList.length - 1){
             // 滑动到底部，触发加载更多
@@ -104,8 +103,8 @@ export default VideoPage = ({navigation,route}) => {
           pageRef.current += 1
 
           // 当前的播放
-          if (videoRef[pageRef.current] && videoRef[pageRef.current].current){
-            videoRef[pageRef.current].current.onChangeVideoStatusPlay()
+          if (videoRef.current[pageRef.current] && videoRef.current[pageRef.current].current){
+            videoRef.current[pageRef.current].current.onChangeVideoStatusPlay()
           }
 
         }else {
@@ -118,8 +117,8 @@ export default VideoPage = ({navigation,route}) => {
           }
           pageRef.current -= 1
           // 当前的播放
-          if (videoRef[pageRef.current] && videoRef[pageRef.current].current){
-            videoRef[pageRef.current].current.onChangeVideoStatusPlay()
+          if (videoRef.current[pageRef.current] && videoRef.current[pageRef.current].current){
+            videoRef.current[pageRef.current].current.onChangeVideoStatusPlay()
           }
         }
       }
@@ -135,15 +134,29 @@ export default VideoPage = ({navigation,route}) => {
   });
 
   const [videoList,setVideoList] = useState([])
-  const [videoRef,setVideoRef] = useState([])
   const [isHas,setIsHas] = useState(true)
-
+  const videoRef = useRef([])
   const flatListRef = useRef()
   const pageRef = useRef(0)
 
-  useEffect(async()=>{
+  useEffect(()=>{
     loadVodeoData()
+
+    navigation.addListener('blur', () => {
+      if (videoRef.current[pageRef.current] && videoRef.current[pageRef.current].current){
+        videoRef.current[pageRef.current].current.onChangeVideoStatusPause()
+      }
+    });
+
+    navigation.addListener('focus', () => {
+      if (videoRef.current[pageRef.current] && videoRef.current[pageRef.current].current){
+        videoRef.current[pageRef.current].current.onChangeVideoStatusPlay()
+      }
+    });
+
   },[])
+
+ 
 
   async function loadVodeoData(add){
     const result = await getVideoList()
@@ -161,7 +174,7 @@ export default VideoPage = ({navigation,route}) => {
     }else {
       setIsHas(false)
     }
-    
+     
   }
 
   return <View style={{flex:1,backgroundColor:'black'}} {...panResponder.panHandlers} >
@@ -169,11 +182,11 @@ export default VideoPage = ({navigation,route}) => {
         data={videoList}
         renderItem={({ item, index }) => {
           return <VideoPlay item={item} onBackRef={(ref)=>{
-            setVideoRef(videoRef.concat([ref]))
+            videoRef.current.splice(index,0,ref)
           }} onSetPlayStatus={()=>{
-            console.log('=================',videoRef);
-            if (videoRef[index] && videoRef[index].current){
-              videoRef[index].current.onChangeVideoStatus()
+            console.log('=================',videoRef.current);
+            if (videoRef.current[index] && videoRef[index].current){
+              videoRef.current[index].current.onChangeVideoStatus()
             }
           }}/>
         }}
@@ -187,7 +200,7 @@ export default VideoPage = ({navigation,route}) => {
         ListFooterComponent={<></>}
       />
       {
-        !isHas && <TouchableOpacity style={styles.reButton} onPress={loadVodeoData}>
+        !isHas && pageRef.current == 0 && <TouchableOpacity style={styles.reButton} onPress={loadVodeoData}>
           <Text style={{color:'#fff'}}>点击刷新</Text>
         </TouchableOpacity>
       }
