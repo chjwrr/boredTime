@@ -59,7 +59,7 @@ export default DownButton = (props) => {
       translateY: animated.current.interpolate({
         inputRange: [0, 1],
         outputRange: [0,20]
-    })
+      })
     }] ,
   }]} onPress={()=>{
     downLoad()
